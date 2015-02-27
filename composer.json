@@ -1,0 +1,22 @@
+{
+    "name": "mlebkowski/silex-private-scope",
+    "description": "Private scope handling for Silex container",
+    "require": {
+        "silex/silex": "~2.0@dev"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.5"
+    },
+	"autoload": {
+		"psr-4": {
+			"Nassau\\Silex\\": "src/"
+		}
+	},
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Maciej Łebkowski",
+            "email": "m.lebkowski@gmail.com"
+        }
+    ]
+}
