@@ -2,6 +2,7 @@
 
 namespace Nassau\Silex;
 
+use Pimple\ServiceProviderInterface;
 use Silex\Application;
 
 class ScopedApplication extends Application
@@ -55,6 +56,24 @@ class ScopedApplication extends Application
 	public function publish($value)
 	{
 		return new PublicService($value);
+	}
+
+	public function register(ServiceProviderInterface $provider, array $values = [])
+	{
+		$scope = $this->enterPrivateScope();
+		$defaultScope = $this->defaultScope;
+		// by default, register all services as public:
+		$this->defaultScope = self::SCOPE_PUBLIC;
+		parent::register($provider, $values);
+		$this->leavePrivateScope($scope);
+		$this->defaultScope = $defaultScope;
+	}
+
+	public function boot()
+	{
+		$scope = $this->enterPrivateScope();
+		parent::boot();
+		$this->leavePrivateScope($scope);
 	}
 
 
